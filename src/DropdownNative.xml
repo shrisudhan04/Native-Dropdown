@@ -24,31 +24,37 @@
             </attributeTypes>
         </property>
 
-        <property key="options" type="string" required="true">
-            <caption>Options</caption>
-            <category>General</category>
-            <description>Comma separated dropdown options</description>
-        </property>
+       <property key="options" type="attribute" required="true">
+    <caption>Options</caption>
+    <category>General</category>
+    <description>Comma separated dropdown options attribute</description>
+    <attributeTypes>
+        <attributeType name="String"/>
+    </attributeTypes>
+</property>
 
         <property key="placeholder" type="string" required="false">
             <caption>Placeholder</caption>
             <category>General</category>
             <description>Placeholder text</description>
         </property>
+
         <property key="leftImage" type="image" required="false">
-    <caption>Left Image</caption>
-    <category>General</category>
-    <description>Image displayed before the placeholder</description>
-</property>
-    <property key="multiSelect" type="boolean" required="true" defaultValue="false">
-    <caption>Multi Select</caption>
-    <category>General</category>
-    <description>Enable multiple selection</description>
-</property>
+            <caption>Left Image</caption>
+            <category>General</category>
+            <description>Image displayed before text</description>
+        </property>
+
         <property key="arrowImage" type="image" required="false">
             <caption>Arrow Image</caption>
             <category>General</category>
-            <description>Select dropdown arrow image from image collection</description>
+            <description>Dropdown arrow image</description>
+        </property>
+
+        <property key="multiSelect" type="boolean" required="true" defaultValue="false">
+            <caption>Multi Select</caption>
+            <category>General</category>
+            <description>Enable multiple selection</description>
         </property>
 
         <property key="onChange" type="action" required="false">
