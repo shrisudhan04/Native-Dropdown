@@ -1,12 +1,20 @@
 import { ReactElement, useMemo, useState, useEffect } from "react";
-import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet, Pressable } from "react-native";
+import {
+    View,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    FlatList,
+    StyleSheet,
+    Pressable,
+    Image,
+    ImageSourcePropType
+} from "react-native";
 import { mergeNativeStyles } from "@mendix/pluggable-widgets-tools";
 import { DropdownNativeProps } from "../typings/DropdownNativeProps";
 
 export function DropdownNative(props: DropdownNativeProps<any>): ReactElement {
-
     const styles = mergeNativeStyles(defaultStyles, props.style);
-
     const [open, setOpen] = useState(false);
     const [search, setSearch] = useState(props.value.displayValue ?? "");
     const [selected, setSelected] = useState(props.value.displayValue ?? "");
@@ -17,16 +25,22 @@ export function DropdownNative(props: DropdownNativeProps<any>): ReactElement {
         setSelected(value);
     }, [props.value.displayValue]);
 
+    const arrowSource = props.arrowImage?.value as ImageSourcePropType;
+
     const options = useMemo(() => {
-        const value = props.options?.value ?? "";
-        return value.split(",").map(item => item.trim()).filter(item => item.length > 0);
-    }, [props.options?.value]);
+        return (props.options ?? "")
+            .split(",")
+            .map(item => item.trim())
+            .filter(item => item.length > 0);
+    }, [props.options]);
 
     const filteredOptions = useMemo(() => {
         if (!search.trim()) {
             return options;
         }
-        return options.filter(item => item.toLowerCase().includes(search.toLowerCase()));
+        return options.filter(item =>
+            item.toLowerCase().includes(search.toLowerCase())
+        );
     }, [search, options]);
 
     const selectItem = (item: string) => {
@@ -47,26 +61,34 @@ export function DropdownNative(props: DropdownNativeProps<any>): ReactElement {
                     onPress={() => setOpen(false)}
                 />
             )}
-            <TextInput
-                style={styles.input}
-                value={search}
-                placeholder={props.placeholder || "Select"}
-                onFocus={() => setOpen(true)}
-                onChangeText={(text) => {
-                    setSearch(text);
-                    setOpen(true);
-                }}
-                returnKeyType="done"
-                onSubmitEditing={() => setOpen(false)}
-            />
+
+            <View style={styles.inputContainer}>
+                <TextInput
+                    style={styles.input}
+                    value={search}
+                    placeholder={props.placeholder || "Select"}
+                    onFocus={() => setOpen(true)}
+                    onChangeText={(text) => {
+                        setSearch(text);
+                        setOpen(true);
+                    }}
+                />
+
+                {arrowSource && (
+                    <Image
+                        source={arrowSource}
+                        style={styles.arrow}
+                    />
+                )}
+            </View>
+
             {open && (
                 <View style={styles.dropdown}>
                     <FlatList
-                        style={filteredOptions.length > 4 ? { maxHeight: 300 } : undefined}
+                        data={filteredOptions}
+                        keyExtractor={(item) => item}
                         keyboardShouldPersistTaps="handled"
                         nestedScrollEnabled={true}
-                        data={filteredOptions}
-                        keyExtractor={item => item}
                         showsVerticalScrollIndicator={true}
                         renderItem={({ item }) => (
                             <TouchableOpacity
@@ -74,9 +96,14 @@ export function DropdownNative(props: DropdownNativeProps<any>): ReactElement {
                                 onPress={() => selectItem(item)}
                             >
                                 <View style={styles.radioOuter}>
-                                    {selected === item && <View style={styles.radioInner} />}
+                                    {selected === item && (
+                                        <View style={styles.radioInner} />
+                                    )}
                                 </View>
-                                <Text style={styles.itemText}>{item}</Text>
+
+                                <Text style={styles.itemText}>
+                                    {item}
+                                </Text>
                             </TouchableOpacity>
                         )}
                         ListEmptyComponent={
@@ -92,66 +119,77 @@ export function DropdownNative(props: DropdownNativeProps<any>): ReactElement {
 }
 
 const defaultStyles = StyleSheet.create({
-    container: {
-        width: "100%",
-        position: "relative",
-        zIndex: 999,
-        elevation: 999
+    container:{
+        width:"100%",
+        position:"relative",
+        zIndex:999,
+        elevation:999
     },
-    input: {
-        height: 45,
-        borderWidth: 1,
-        borderColor: "#CCC",
-        borderRadius: 6,
-        paddingHorizontal: 12,
-        backgroundColor: "white"
+    inputContainer:{
+        width:"100%",
+        position:"relative"
     },
-    dropdown: {
-        position: "absolute",
-        top: 48,
-        left: 0,
-        right: 0,
-        backgroundColor: "white",
-        borderWidth: 1,
-        borderColor: "#CCC",
-        borderRadius: 6,
-        zIndex: 9999,
-        elevation: 20
+    input:{
+        height:45,
+        borderWidth:1,
+        borderColor:"#CCC",
+        borderRadius:6,
+        paddingHorizontal:12,
+        paddingRight:45,
+        backgroundColor:"white"
     },
-    overlay: {
-        position: "absolute",
-        top: -1000,
-        left: -1000,
-        right: -1000,
-        bottom: -1000,
-        zIndex: -1
+    arrow:{
+        position:"absolute",
+        right:12,
+        top:12,
+        width:20,
+        height:20
     },
-    item: {
-        flexDirection: "row",
-        alignItems: "center",
-        padding: 12
+    dropdown:{
+        position:"absolute",
+        top:48,
+        left:0,
+        right:0,
+        backgroundColor:"white",
+        borderWidth:1,
+        borderColor:"#CCC",
+        borderRadius:6,
+        elevation:20,
+        maxHeight:300
     },
-    radioOuter: {
-        width: 18,
-        height: 18,
-        borderRadius: 9,
-        borderWidth: 2,
-        borderColor: "#555",
-        justifyContent: "center",
-        alignItems: "center",
-        marginRight: 10
+    overlay:{
+        position:"absolute",
+        top:-1000,
+        left:-1000,
+        right:-1000,
+        bottom:-1000
     },
-    radioInner: {
-        width: 10,
-        height: 10,
-        borderRadius: 5,
-        backgroundColor: "#555"
+    item:{
+        flexDirection:"row",
+        alignItems:"center",
+        padding:12
     },
-    itemText: {
-        fontSize: 15
+    radioOuter:{
+        width:18,
+        height:18,
+        borderRadius:9,
+        borderWidth:2,
+        borderColor:"#555",
+        justifyContent:"center",
+        alignItems:"center",
+        marginRight:10
     },
-    emptyText: {
-        padding: 12,
-        color: "#888"
+    radioInner:{
+        width:10,
+        height:10,
+        borderRadius:5,
+        backgroundColor:"#555"
+    },
+    itemText:{
+        fontSize:15
+    },
+    emptyText:{
+        padding:12,
+        color:"#888"
     }
 });

@@ -10,81 +10,44 @@
     xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
 
     <name>Dropdown Native</name>
-    <description>
-        Searchable Native Dropdown
-    </description>
+    <description>Searchable Native Dropdown</description>
     <icon />
 
-   <properties>
+    <properties>
 
-    <propertyGroup caption="General">
-
-        <property
-            key="value"
-            type="attribute"
-            required="true">
-
+        <property key="value" type="attribute" required="true">
             <caption>Value</caption>
-
-            <description>
-                Selected value attribute.
-            </description>
-
+            <category>General</category>
+            <description>Selected value attribute</description>
             <attributeTypes>
                 <attributeType name="String"/>
-                <attributeType name="Enum"/>
             </attributeTypes>
-
         </property>
 
-        <property
-            key="options"
-            type="attribute"
-            required="true">
-
+        <property key="options" type="string" required="true">
             <caption>Options</caption>
-
-            <description>
-                String attribute containing comma separated values.
-            </description>
-
-            <attributeTypes>
-                <attributeType name="String"/>
-            </attributeTypes>
-
+            <category>General</category>
+            <description>Comma separated dropdown options</description>
         </property>
 
-        <property
-            key="placeholder"
-            type="string"
-            required="false">
-
+        <property key="placeholder" type="string" required="false">
             <caption>Placeholder</caption>
-
-            <description>
-                Placeholder text.
-            </description>
-
+            <category>General</category>
+            <description>Placeholder text</description>
         </property>
 
-    </propertyGroup>
+        <property key="arrowImage" type="image" required="false">
+            <caption>Arrow Image</caption>
+            <category>General</category>
+            <description>Select dropdown arrow image from image collection</description>
+        </property>
 
-    <propertyGroup caption="Events">
-
-        <property
-            key="onChange"
-            type="action"
-            required="false">
-
+        <property key="onChange" type="action" required="false">
             <caption>On Change</caption>
-
-            <description>
-                Action executed after selection.
-            </description>
-
+            <category>Events</category>
+            <description>Action after selection</description>
         </property>
 
-    </propertyGroup>
+    </properties>
 
-</properties>
 </widget>

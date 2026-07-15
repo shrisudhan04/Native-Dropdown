@@ -3,15 +3,16 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Framework Team
  */
-import { ActionValue, EditableValue } from "mendix";
+import { ActionValue, DynamicValue, EditableValue, NativeImage } from "mendix";
 import { CSSProperties } from "react";
 
 export interface DropdownNativeProps<Style> {
     name: string;
     style: Style[];
     value: EditableValue<string>;
-    options: EditableValue<string>;
+    options: string;
     placeholder: string;
+    arrowImage?: DynamicValue<NativeImage>;
     onChange?: ActionValue;
 }
 
@@ -29,5 +30,6 @@ export interface DropdownNativePreviewProps {
     value: string;
     options: string;
     placeholder: string;
+    arrowImage: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;
     onChange: {} | null;
 }
