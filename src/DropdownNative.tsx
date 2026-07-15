@@ -192,17 +192,22 @@ inputWrapper: {
     flexDirection: "row",
     alignItems: "center"
 },
-dropdown: {
+    dropdown: {
     position: "absolute",
     top: 48,
     left: 0,
     right: 0,
     backgroundColor: "#FFF",
-    borderWidth: 1,
+    borderWidth: 0,
     borderColor: "#CCC",
-    borderRadius: 6,
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
+    overflow: "hidden",
     elevation: 50,
-    zIndex: 99999
+    zIndex: 99999,
+    maxHeight: 300
 },
 leftImage: {
     width: 20,
