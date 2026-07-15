@@ -10,90 +10,81 @@
     xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
 
     <name>Dropdown Native</name>
-    <description>Searchable Native Dropdown</description>
+    <description>
+        Searchable Native Dropdown
+    </description>
     <icon />
 
-    <properties>
+   <properties>
 
-        <propertyGroup caption="General">
+    <propertyGroup caption="General">
 
-            <property
-                key="value"
-                type="attribute"
-                required="true">
+        <property
+            key="value"
+            type="attribute"
+            required="true">
 
-                <caption>Value</caption>
+            <caption>Value</caption>
 
-                <description>
-                    Bind a String or Enumeration attribute.
-                </description>
+            <description>
+                Selected value attribute.
+            </description>
 
-                <attributeTypes>
-                    <attributeType name="String"/>
-                    <attributeType name="Enum"/>
-                </attributeTypes>
+            <attributeTypes>
+                <attributeType name="String"/>
+                <attributeType name="Enum"/>
+            </attributeTypes>
 
-            </property>
+        </property>
 
-            <property
-                key="options"
-                type="string"
-                required="true">
+        <property
+            key="options"
+            type="attribute"
+            required="true">
 
-                <caption>Options</caption>
+            <caption>Options</caption>
 
-                <description>
-                    Comma separated values.
-                    Example:
-                    Male,Female,Other
-                </description>
+            <description>
+                String attribute containing comma separated values.
+            </description>
 
-            </property>
+            <attributeTypes>
+                <attributeType name="String"/>
+            </attributeTypes>
 
-            <property
-                key="placeholder"
-                type="string"
-                required="false">
+        </property>
 
-                <caption>Placeholder</caption>
+        <property
+            key="placeholder"
+            type="string"
+            required="false">
 
-                <description>
-                    Placeholder text.
-                </description>
+            <caption>Placeholder</caption>
 
-            </property>
+            <description>
+                Placeholder text.
+            </description>
 
-            <property
-                key="searchEnabled"
-                type="boolean"
-                defaultValue="true">
+        </property>
 
-                <caption>Enable Search</caption>
+    </propertyGroup>
 
-                <description>
-                    Show search textbox.
-                </description>
+    <propertyGroup caption="Events">
 
-            </property>
+        <property
+            key="onChange"
+            type="action"
+            required="false">
 
-        </propertyGroup>
+            <caption>On Change</caption>
 
-        <propertyGroup caption="Events">
+            <description>
+                Action executed after selection.
+            </description>
 
-            <property
-                key="onChange"
-                type="action">
+        </property>
 
-                <caption>On Change</caption>
+    </propertyGroup>
 
-                <description>
-                    Executes after selecting an item.
-                </description>
-
-            </property>
-
-        </propertyGroup>
-
-    </properties>
-
+</properties>
 </widget>

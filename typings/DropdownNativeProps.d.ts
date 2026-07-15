@@ -10,9 +10,8 @@ export interface DropdownNativeProps<Style> {
     name: string;
     style: Style[];
     value: EditableValue<string>;
-    options: string;
+    options: EditableValue<string>;
     placeholder: string;
-    searchEnabled: boolean;
     onChange?: ActionValue;
 }
 
@@ -30,6 +29,5 @@ export interface DropdownNativePreviewProps {
     value: string;
     options: string;
     placeholder: string;
-    searchEnabled: boolean;
     onChange: {} | null;
 }
