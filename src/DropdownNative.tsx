@@ -101,27 +101,25 @@ export function DropdownNative(props: DropdownNativeProps<any>): ReactElement {
                             style={styles.leftImage}
                         />
                     )}
-                    <TextInput
-                        style={styles.input}
-                        value={
-                            props.multiSelect
-                                ? open
-                                    ? search
-                                    : selectedDisplay.join(", ")
-                                : open
-                                    ? search
-                                    : selectedDisplay[0] ?? ""
-                        }
-                        editable={open}
-                        placeholder={props.placeholder || "Select"}
-                        onFocus={() => {
-                            setOpen(true);
-                            setSearch("");
-                        }}
-                        onChangeText={(text) => {
-                            setSearch(text);
-                        }}
-                    />
+                   <TextInput
+    style={styles.input}
+    value={
+        open
+            ? search
+            : props.multiSelect
+                ? selectedDisplay.join(", ")
+                : selectedDisplay[0] ?? ""
+    }
+    editable={true}
+    placeholder={props.placeholder || "Select"}
+    onFocus={() => {
+        setOpen(true);
+        setSearch("");
+    }}
+    onChangeText={(text) => {
+        setSearch(text);
+    }}
+/>
                     {arrowSource && (
                         <TouchableOpacity
                             style={styles.arrowContainer}
