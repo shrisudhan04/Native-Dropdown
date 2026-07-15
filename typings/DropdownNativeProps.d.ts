@@ -12,6 +12,7 @@ export interface DropdownNativeProps<Style> {
     value: EditableValue<string>;
     options: string;
     placeholder: string;
+    leftImage?: DynamicValue<NativeImage>;
     arrowImage?: DynamicValue<NativeImage>;
     onChange?: ActionValue;
 }
@@ -30,6 +31,7 @@ export interface DropdownNativePreviewProps {
     value: string;
     options: string;
     placeholder: string;
+    leftImage: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;
     arrowImage: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;
     onChange: {} | null;
 }

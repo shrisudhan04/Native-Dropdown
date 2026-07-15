@@ -26,6 +26,7 @@ export function DropdownNative(props: DropdownNativeProps<any>): ReactElement {
     }, [props.value.displayValue]);
 
     const arrowSource = props.arrowImage?.value as ImageSourcePropType;
+    const leftImageSource = props.leftImage?.value as ImageSourcePropType;
 
     const options = useMemo(() => {
         return (props.options ?? "")
@@ -57,30 +58,53 @@ export function DropdownNative(props: DropdownNativeProps<any>): ReactElement {
         <View style={styles.container}>
             {open && (
                 <Pressable
-                    style={styles.overlay}
+                    style={styles.absoluteFill}
                     onPress={() => setOpen(false)}
                 />
             )}
 
-            <View style={styles.inputContainer}>
-                <TextInput
-                    style={styles.input}
-                    value={search}
-                    placeholder={props.placeholder || "Select"}
-                    onFocus={() => setOpen(true)}
-                    onChangeText={(text) => {
-                        setSearch(text);
-                        setOpen(true);
-                    }}
-                />
+        <View style={styles.inputContainer}>
+    <View style={styles.inputWrapper}>
+        {leftImageSource && (
+            <Image
+                source={leftImageSource}
+                style={styles.leftImage}
+            />
+        )}
 
-                {arrowSource && (
-                    <Image
-                        source={arrowSource}
-                        style={styles.arrow}
-                    />
-                )}
-            </View>
+        <TextInput
+            style={styles.input}
+            value={search}
+            placeholder={props.placeholder || "Select"}
+            onFocus={() => setOpen(true)}
+            onChangeText={text => {
+                setSearch(text);
+                setOpen(true);
+            }}
+        />
+
+        {arrowSource && (
+            <TouchableOpacity
+                onPress={() => setOpen(!open)}
+                style={styles.arrowContainer}
+            >
+                <Image
+                    source={arrowSource}
+                    style={[
+                        styles.arrow,
+                        {
+                            transform: [
+                                {
+                                    rotate: open ? "180deg" : "0deg"
+                                }
+                            ]
+                        }
+                    ]}
+                />
+            </TouchableOpacity>
+        )}
+    </View>
+</View>
 
             {open && (
                 <View style={styles.dropdown}>
@@ -117,79 +141,91 @@ export function DropdownNative(props: DropdownNativeProps<any>): ReactElement {
         </View>
     );
 }
+const defaultStyles = StyleSheet.create({inputContainer: {
+    width: "100%"
+},
+emptyText: {
+    paddingVertical: 16,
+    paddingHorizontal: 12,
+    textAlign: "center",
+    fontSize: 15,
+    color: "#888888"
+},
+item: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 12,
+    paddingVertical: 12,
+    minHeight: 48,
+    backgroundColor: "#FFFFFF"
+},
 
-const defaultStyles = StyleSheet.create({
-    container:{
-        width:"100%",
-        position:"relative",
-        zIndex:999,
-        elevation:999
-    },
-    inputContainer:{
-        width:"100%",
-        position:"relative"
-    },
-    input:{
-        height:45,
-        borderWidth:1,
-        borderColor:"#CCC",
-        borderRadius:6,
-        paddingHorizontal:12,
-        paddingRight:45,
-        backgroundColor:"white"
-    },
-    arrow:{
-        position:"absolute",
-        right:12,
-        top:12,
-        width:20,
-        height:20
-    },
-    dropdown:{
-        position:"absolute",
-        top:48,
-        left:0,
-        right:0,
-        backgroundColor:"white",
-        borderWidth:1,
-        borderColor:"#CCC",
-        borderRadius:6,
-        elevation:20,
-        maxHeight:300
-    },
-    overlay:{
-        position:"absolute",
-        top:-1000,
-        left:-1000,
-        right:-1000,
-        bottom:-1000
-    },
-    item:{
-        flexDirection:"row",
-        alignItems:"center",
-        padding:12
-    },
-    radioOuter:{
-        width:18,
-        height:18,
-        borderRadius:9,
-        borderWidth:2,
-        borderColor:"#555",
-        justifyContent:"center",
-        alignItems:"center",
-        marginRight:10
-    },
-    radioInner:{
-        width:10,
-        height:10,
-        borderRadius:5,
-        backgroundColor:"#555"
-    },
-    itemText:{
-        fontSize:15
-    },
-    emptyText:{
-        padding:12,
-        color:"#888"
-    }
-});
+radioOuter: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#212121",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 12
+},
+
+radioInner: {
+    width: 12,
+    height: 12,
+    borderRadius: 7,
+    backgroundColor: "#212121"
+},
+
+itemText: {
+    flex: 1,
+    fontSize: 15,
+    color: "#222222"
+},
+inputWrapper: {
+    height: 45,
+    borderWidth: 1,
+    borderColor: "#CCC",
+    borderRadius: 6,
+    backgroundColor: "#FFF",
+    flexDirection: "row",
+    alignItems: "center"
+},
+dropdown: {
+    position: "absolute",
+    top: 48,
+    left: 0,
+    right: 0,
+    backgroundColor: "#FFF",
+    borderWidth: 1,
+    borderColor: "#CCC",
+    borderRadius: 6,
+    elevation: 50,
+    zIndex: 99999
+},
+leftImage: {
+    width: 20,
+    height: 20,
+    marginLeft: 12,
+    marginRight: 8
+},
+
+input: {
+    flex: 1,
+    height: "100%",
+    fontSize: 15,
+    padding: 0
+},
+
+arrowContainer: {
+    width: 45,
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center"
+},
+
+arrow: {
+    width: 20,
+    height: 20
+},});

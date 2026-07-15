@@ -35,7 +35,11 @@
             <category>General</category>
             <description>Placeholder text</description>
         </property>
-
+        <property key="leftImage" type="image" required="false">
+    <caption>Left Image</caption>
+    <category>General</category>
+    <description>Image displayed before the placeholder</description>
+</property>
         <property key="arrowImage" type="image" required="false">
             <caption>Arrow Image</caption>
             <category>General</category>
