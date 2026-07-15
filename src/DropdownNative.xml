@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget
+    id="mendix.dropdownnative.DropdownNative"
+    pluginWidget="true"
+    needsEntityContext="true"
+    offlineCapable="true"
+    supportedPlatform="Native"
+    xmlns="http://www.mendix.com/widget/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+
+    <name>Dropdown Native</name>
+    <description>Searchable Native Dropdown</description>
+    <icon />
+
+    <properties>
+
+        <propertyGroup caption="General">
+
+            <property
+                key="value"
+                type="attribute"
+                required="true">
+
+                <caption>Value</caption>
+
+                <description>
+                    Bind a String or Enumeration attribute.
+                </description>
+
+                <attributeTypes>
+                    <attributeType name="String"/>
+                    <attributeType name="Enum"/>
+                </attributeTypes>
+
+            </property>
+
+            <property
+                key="options"
+                type="string"
+                required="true">
+
+                <caption>Options</caption>
+
+                <description>
+                    Comma separated values.
+                    Example:
+                    Male,Female,Other
+                </description>
+
+            </property>
+
+            <property
+                key="placeholder"
+                type="string"
+                required="false">
+
+                <caption>Placeholder</caption>
+
+                <description>
+                    Placeholder text.
+                </description>
+
+            </property>
+
+            <property
+                key="searchEnabled"
+                type="boolean"
+                defaultValue="true">
+
+                <caption>Enable Search</caption>
+
+                <description>
+                    Show search textbox.
+                </description>
+
+            </property>
+
+        </propertyGroup>
+
+        <propertyGroup caption="Events">
+
+            <property
+                key="onChange"
+                type="action">
+
+                <caption>On Change</caption>
+
+                <description>
+                    Executes after selecting an item.
+                </description>
+
+            </property>
+
+        </propertyGroup>
+
+    </properties>
+
+</widget>
