@@ -24,10 +24,14 @@
             </attributeTypes>
         </property>
 
-       <property key="options" type="attribute" required="true">
+     <property
+    key="options"
+    type="attribute"
+    required="true">
     <caption>Options</caption>
     <category>General</category>
-    <description>Comma separated dropdown options attribute</description>
+    <description>Comma separated options (e.g. Apple,Banana,Orange)</description>
+
     <attributeTypes>
         <attributeType name="String"/>
     </attributeTypes>
